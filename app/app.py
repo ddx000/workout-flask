@@ -5,10 +5,13 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import render_template
+import json
 
-GOOGLE_OAUTH2_CLIENT_ID = '這部分輸入自己的_oauth2_client_id'
 
-print("hefewf")
+with open("key.json", "r") as f:
+    key = json.load(f)
+    GOOGLE_OAUTH2_CLIENT_ID = key["GOOGLE_OAUTH2_CLIENT_ID"]
+
 
 app = Flask(__name__)
 
@@ -28,6 +31,7 @@ def google_sign_in():
             requests.Request(),
             GOOGLE_OAUTH2_CLIENT_ID
         )
+        print(id_info)
         if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise ValueError('Wrong issuer.')
     except ValueError:
