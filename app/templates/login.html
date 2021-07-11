@@ -9,23 +9,8 @@
 </head>
 
 <body>
-    {% if current_user.is_authenticated %}
-    login
-    <p>Hello, {{current_user.name}}! You're logged in! Email: {{current_user.email}}</p>
-    <div>
-        <p>Google Profile Picture:</p>
-        <img src="{{current_user.profile_pic}}" alt="Google profile pic"></img></div>
-        <a class="button" href="/logout">Logout</a>
-
-    {% else %}
-    <!-- <a class="button" href="/login">Google Login</a> -->
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-    {% endif %}
-
     <script>
         function onSignIn(googleUser) {
-            console.log("onSignIn called");
             var id_token = googleUser.getAuthResponse().id_token;
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -38,13 +23,13 @@
                 data: JSON.stringify({ 'id_token': id_token }),
                 success: function () {
                     console.log('login success')
-                    window.location.reload();
                 },
                 dataType: 'json',
                 contentType: "application/json",
             });
         }
     </script>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
 
 </html>

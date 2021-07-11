@@ -8,6 +8,9 @@ requests = "*"
 flask = "*"
 google-api-python-client = "==1.7.8"
 google-auth-oauthlib = "==0.2.0"
+oauthlib = "*"
+pyopenssl = "*"
+flask-login = "*"
 
 [dev-packages]
 
